@@ -1,0 +1,61 @@
+{% block body %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2" href="">
+                <img
+                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                    height="16"
+                    alt="MDB Logo"
+                    loading="lazy"
+                    style="margin-top: -1px;"
+                />
+            </a>
+
+            <!-- Toggle button -->
+            <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <i class="fas fa-bars"></i>
+            </button>
+
+                <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" style="margin-left:20px;"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tableaux
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="">Voire ses tableaux</a></li>
+                            <li><a class="dropdown-item" href="">Créer un nouveau tableau</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+      <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+            </ul>
+            <!-- Left links -->
+
+            <div class="d-flex align-items-center">
+                <a class="btn btn-dark" href="{{ path('app_logout') }}" role="button">Deconnexion</a>
+            </div>
+        </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+{% endblock %}

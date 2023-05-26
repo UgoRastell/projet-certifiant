@@ -17,9 +17,7 @@
         {% endblock %}
     </head>
     <body>
-        {% if userLogged == null %}
-            {% include 'navbar.html.twig' %}
-        {% endif %}
+        {% include 'navbar.html.twig' %}
         <div class="container">
             {% block body %}{% endblock %}
         </div>

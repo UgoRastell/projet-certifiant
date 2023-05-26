@@ -72,10 +72,11 @@ class Tutoriel
         return $this->fichier_video;
     }
 
-    public function setFichierVideo(string $fichier_video): self
+    public function setFichierVideo(?string $fichier_video): self
     {
         $this->fichier_video = $fichier_video;
-
+    
         return $this;
     }
+    
 }

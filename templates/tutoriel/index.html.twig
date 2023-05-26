@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tutoriel index{% endblock %}
+
+{% block body %}
+    <h1>Tutoriel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Fichier_PDF</th>
+                <th>Fichier_video</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tutoriel in tutoriels %}
+            <tr>
+                <td>{{ tutoriel.id }}</td>
+                <td>{{ tutoriel.titre }}</td>
+                <td>{{ tutoriel.description }}</td>
+                <td>
+                    {% if tutoriel.fichierPDF %}
+                        <a href="{{ asset(tutoriel.fichierPDF) }}" target="_blank">PDF</a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ tutoriel.fichierVideo }}</td>
+                <td>
+                    <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}">show</a>
+                    <a href="{{ path('app_tutoriel_edit', {'id': tutoriel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tutoriel_new') }}">Create new</a>
+{% endblock %}

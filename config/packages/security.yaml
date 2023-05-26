@@ -35,6 +35,10 @@ security:
         - { path: ^/auth/login, roles: PUBLIC_ACCESS }
         - { path: ^/auth/register, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: PUBLIC_ACCESS }
+        
+parameters:
+    app.upload_directory: '%kernel.project_dir%/public/uploads'
+
 
 when@test:
     security:
