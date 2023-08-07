@@ -27,32 +27,39 @@
             <i class="fas fa-bars"></i>
             </button>
 
-                <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" style="margin-left:20px;"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Tableaux
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="">Voire ses tableaux</a></li>
-                            <li><a class="dropdown-item" href="">Créer un nouveau tableau</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-      <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" style="margin-left:20px;"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tableaux
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="">Voir ses tableaux</a></li>
+                                <li><a class="dropdown-item" href="">Créer un nouveau tableau</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
                 
-            </ul>
-            <!-- Left links -->
-
-            <div class="d-flex align-items-center">
-                <a class="btn btn-dark" href="{{ path('app_logout') }}" role="button">Deconnexion</a>
+                <!-- Right links -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="btn btn-dark" href="{{ path('app_logout') }}" role="button">Déconnexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark" href="{{ path('app_delete_user') }}" role="button">Désinscription</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{{ path('app_login') }}" role="button">Connexion</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
-        </div>
             <!-- Collapsible wrapper -->
         </div>
         <!-- Container wrapper -->

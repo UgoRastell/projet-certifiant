@@ -26,6 +26,9 @@ class Tutoriel
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fichier_video = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $categorie = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Tutoriel
     {
         $this->fichier_video = $fichier_video;
     
+        return $this;
+    }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): self
+    {
+        $this->categorie = $categorie;
+
         return $this;
     }
     
