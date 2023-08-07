@@ -13,7 +13,8 @@
                 <th>Description</th>
                 <th>Fichier_PDF</th>
                 <th>Fichier_video</th>
-                <th>actions</th>
+                <th>Catégories</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,14 +23,16 @@
                 <td>{{ tutoriel.id }}</td>
                 <td>{{ tutoriel.titre }}</td>
                 <td>{{ tutoriel.description }}</td>
-                <td>
-                    {% if tutoriel.fichierPDF %}
-                        <a href="{{ asset(tutoriel.fichierPDF) }}" target="_blank">PDF</a>
-                    {% else %}
-                        N/A
-                    {% endif %}
-                </td>
+                <td>{{ tutoriel.fichierPDF }}</td>
                 <td>{{ tutoriel.fichierVideo }}</td>
+                <td>
+                    {% for categorie in tutoriel.categories %}
+                        {{ categorie.nom }}
+                        {% if not loop.last %}, {% endif %}
+                    {% else %}
+                        No Category
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}">show</a>
                     <a href="{{ path('app_tutoriel_edit', {'id': tutoriel.id}) }}">edit</a>
@@ -37,7 +40,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

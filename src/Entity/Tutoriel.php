@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\TutorielRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: TutorielRepository::class)]
 class Tutoriel
@@ -26,8 +28,13 @@ class Tutoriel
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fichier_video = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $categorie = null;
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'tutoriels')]
+    private Collection $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,20 +85,33 @@ class Tutoriel
     public function setFichierVideo(?string $fichier_video): self
     {
         $this->fichier_video = $fichier_video;
-    
-        return $this;
-    }
-
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
 
         return $this;
     }
-    
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addTutoriel($this); // Assurez-vous d'ajouter le tutoriel à la catégorie également
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        $this->categories->removeElement($category);
+        $category->removeTutoriel($this); // Assurez-vous de retirer le tutoriel de la catégorie également
+
+        return $this;
+    }
 }
