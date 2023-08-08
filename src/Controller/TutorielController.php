@@ -9,15 +9,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CategorieRepository;
 
 #[Route('/tutoriel')]
 class TutorielController extends AbstractController
 {
     #[Route('/', name: 'app_tutoriel_index', methods: ['GET'])]
-    public function index(TutorielRepository $tutorielRepository): Response
+    public function index(TutorielRepository $tutorielRepository,Request $request, CategorieRepository $categorieRepository): Response
     {
+        $categoryId = $request->query->get('category');
+        $categories = $categorieRepository->findAll();
+    
+        if ($categoryId) {
+            $tutoriels = $tutorielRepository->findByCategory($categoryId);
+        } else {
+            $tutoriels = $tutorielRepository->findAll();
+        }
+    
         return $this->render('tutoriel/index.html.twig', [
-            'tutoriels' => $tutorielRepository->findAll(),
+            'tutoriels' => $tutoriels,
+            'categories' => $categories,
         ]);
     }
 

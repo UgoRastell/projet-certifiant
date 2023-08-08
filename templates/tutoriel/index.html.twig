@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Tutoriel index</h1>
 
+    <div>
+        {% for categorie in categories %}
+            <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}">{{ categorie.nom }}</a>
+        {% endfor %}
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -27,7 +33,7 @@
                 <td>{{ tutoriel.fichierVideo }}</td>
                 <td>
                     {% for categorie in tutoriel.categories %}
-                        {{ categorie.nom }}
+                        <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}">{{ categorie.nom }}</a>
                         {% if not loop.last %}, {% endif %}
                     {% else %}
                         No Category

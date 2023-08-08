@@ -39,6 +39,18 @@ class TutorielRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCategory($categoryId)
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.categories', 'c')
+            ->andWhere('c.id = :categoryId')
+            ->setParameter('categoryId', $categoryId)
+            ->getQuery()
+            ->getResult();
+    }
+}
+
+
 //    /**
 //     * @return Tutoriel[] Returns an array of Tutoriel objects
 //     */
@@ -63,4 +75,4 @@ class TutorielRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+
