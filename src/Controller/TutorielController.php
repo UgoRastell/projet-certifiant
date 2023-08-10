@@ -38,18 +38,35 @@ class TutorielController extends AbstractController
         $tutoriel = new Tutoriel();
         $form = $this->createForm(Tutoriel1Type::class, $tutoriel);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gérer les fichiers PDF et vidéo
+            $pdfFile = $form['fichier_PDF']->getData();
+            $videoFile = $form['fichier_video']->getData();
+    
+            if ($pdfFile) {
+                $pdfFileName = md5(uniqid()) . '.' . $pdfFile->guessExtension();
+                $pdfFile->move($this->getParameter('app.upload_PDF'), $pdfFileName);
+                $tutoriel->setFichierPDF($pdfFileName); // Assurez-vous d'ajuster cette méthode selon votre entité Tutoriel
+            }
+    
+            if ($videoFile) {
+                $videoFileName = md5(uniqid()) . '.' . $videoFile->guessExtension();
+                $videoFile->move($this->getParameter('app.upload_video'), $videoFileName);
+                $tutoriel->setFichierVideo($videoFileName); // Assurez-vous d'ajuster cette méthode selon votre entité Tutoriel
+            }
+    
             $tutorielRepository->save($tutoriel, true);
-
+    
             return $this->redirectToRoute('app_tutoriel_index', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->renderForm('tutoriel/new.html.twig', [
             'tutoriel' => $tutoriel,
             'form' => $form,
         ]);
-    }
+    }    
+    
 
     #[Route('/{id}', name: 'app_tutoriel_show', methods: ['GET'])]
     public function show(Tutoriel $tutoriel): Response

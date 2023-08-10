@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class Tutoriel1Type extends AbstractType
 {
@@ -16,8 +17,14 @@ class Tutoriel1Type extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('fichier_PDF')
-            ->add('fichier_video')
+            ->add('fichier_PDF', FileType::class, [
+                'label' => 'Fichier PDF',
+                'required' => false, // Rendre le champ facultatif si nécessaire
+            ])
+            ->add('fichier_video', FileType::class, [
+                'label' => 'Fichier vidéo',
+                'required' => false, // Rendre le champ facultatif si nécessaire
+            ])
             ->add('categories', EntityType::class, [ // Utilisez le EntityType
                 'class' => Categorie::class,
                 'choice_label' => 'nom',
