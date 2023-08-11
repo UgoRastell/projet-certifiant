@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\Tutoriel;
@@ -15,24 +14,31 @@ class Tutoriel1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre')
-            ->add('description')
+            ->add('titre', null, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('description', null, [
+                'attr' => ['class' => 'form-control']
+            ])
             ->add('fichier_PDF', FileType::class, [
                 'label' => 'Fichier PDF',
-                'required' => false, // Rendre le champ facultatif si nécessaire
+                'required' => false,
+                'attr' => ['class' => 'form-control-file']
             ])
             ->add('fichier_video', FileType::class, [
                 'label' => 'Fichier vidéo',
-                'required' => false, // Rendre le champ facultatif si nécessaire
+                'required' => false,
+                'attr' => ['class' => 'form-control-file']
             ])
-            ->add('categories', EntityType::class, [ // Utilisez le EntityType
+            ->add('categories', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nom',
-                'multiple' => true, // Indique une relation ManyToMany
-                'expanded' => true, // Peut être false en fonction de votre conception
-            ])
-
-        ;
+                'multiple' => true,
+                'expanded' => true,
+                'choice_attr' => function () {
+                    return ['class' => 'form-check-input'];
+                },
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -42,3 +48,6 @@ class Tutoriel1Type extends AbstractType
         ]);
     }
 }
+
+
+

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique{% endblock %}
+
+{% block body %}
+    <h1>Historique</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tutoriel</th>
+                <th>Date de fin</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for historique in historiques %}
+            <tr>
+                <td>{{ historique.idTutoriel.titre }}</td>
+                <td>{{ historique.dateFinish|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Aucun historique trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tutoriel_index') }}">Retour à la liste des tutoriels</a>
+{% endblock %}

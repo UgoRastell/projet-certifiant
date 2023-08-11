@@ -16,11 +16,11 @@ class Historique
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $id_user = null;
+    private ?User $id_user = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?tutoriel $id_tutoriel = null;
+    private ?Tutoriel $id_tutoriel = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_finish = null;
@@ -30,24 +30,24 @@ class Historique
         return $this->id;
     }
 
-    public function getIdUser(): ?user
+    public function getIdUser(): ?User
     {
         return $this->id_user;
     }
 
-    public function setIdUser(?user $id_user): self
+    public function setIdUser(?User $id_user): self
     {
         $this->id_user = $id_user;
 
         return $this;
     }
 
-    public function getIdTutoriel(): ?tutoriel
+    public function getIdTutoriel(): ?Tutoriel
     {
         return $this->id_tutoriel;
     }
 
-    public function setIdTutoriel(?tutoriel $id_tutoriel): self
+    public function setIdTutoriel(?Tutoriel $id_tutoriel): self
     {
         $this->id_tutoriel = $id_tutoriel;
 

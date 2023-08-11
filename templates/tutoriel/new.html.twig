@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Tutoriel{% endblock %}
+{% block title %}Nouveau Tutoriel{% endblock %}
 
 {% block body %}
-    <h1>Create new Tutoriel</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Créer un nouveau Tutoriel</h2>
 
-    {{ include('tutoriel/_form.html.twig') }}
+                        {{ include('tutoriel/_form.html.twig') }}
 
-    <a href="{{ path('app_tutoriel_index') }}">back to list</a>
+                        <a href="{{ path('app_tutoriel_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

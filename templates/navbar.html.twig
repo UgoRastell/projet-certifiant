@@ -1,30 +1,29 @@
 {% block body %}
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <!-- Container wrapper -->
         <div class="container">
             <!-- Navbar brand -->
             <a class="navbar-brand me-2" href="">
                 <img
                     src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                    height="16"
+                    height="30"
                     alt="MDB Logo"
                     loading="lazy"
-                    style="margin-top: -1px;"
                 />
             </a>
 
             <!-- Toggle button -->
             <button
-            class="navbar-toggler"
-            type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarButtonsExample"
-            aria-controls="navbarButtonsExample"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample"
+                aria-controls="navbarButtonsExample"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
             >
-            <i class="fas fa-bars"></i>
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <!-- Collapsible wrapper -->
@@ -32,14 +31,7 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn btn-light dropdown-toggle" style="margin-left:20px;"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tableaux
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="">Voir ses tableaux</a></li>
-                                <li><a class="dropdown-item" href="">Créer un nouveau tableau</a></li>
-                            </ul>
+                        <a class="btn btn-primary" href="{{ path('app_historique_index') }}" role="button">Historique</a>
                         </div>
                     </li>
                 </ul>
@@ -48,10 +40,10 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if app.user %}
                         <li class="nav-item">
-                            <a class="btn btn-dark" href="{{ path('app_logout') }}" role="button">Déconnexion</a>
+                            <a class="btn btn-light me-2" href="{{ path('app_logout') }}" role="button">Déconnexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-dark" href="{{ path('app_delete_user') }}" role="button">Désinscription</a>
+                            <a class="btn btn-light" href="{{ path('app_delete_user') }}" role="button">Désinscription</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
@@ -59,6 +51,7 @@
                         </li>
                     {% endif %}
                 </ul>
+
             </div>
             <!-- Collapsible wrapper -->
         </div>

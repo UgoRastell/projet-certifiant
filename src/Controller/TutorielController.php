@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Tutoriel;
+use App\Entity\Historique;
 use App\Form\Tutoriel1Type;
 use App\Repository\TutorielRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategorieRepository;
+use App\Repository\HistoriqueRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\CategorieRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/tutoriel')]
 class TutorielController extends AbstractController
@@ -95,12 +98,35 @@ class TutorielController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_tutoriel_delete', methods: ['POST'])]
-    public function delete(Request $request, Tutoriel $tutoriel, TutorielRepository $tutorielRepository): Response
+    public function delete(Request $request, Tutoriel $tutoriel, TutorielRepository $tutorielRepository, HistoriqueRepository $historiqueRepository, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tutoriel->getId(), $request->request->get('_token'))) {
+            // Supprimer l'historique lié au tutoriel
+            $historiques = $historiqueRepository->findBy(['id_tutoriel' => $tutoriel->getId()]);
+            foreach ($historiques as $historique) {
+                $entityManager->remove($historique);
+            }
+    
+            // Supprimer le tutoriel
             $tutorielRepository->remove($tutoriel, true);
         }
-
+    
         return $this->redirectToRoute('app_tutoriel_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/finish', name: 'app_tutoriel_finish', methods: ['GET'])]
+    public function finish(Tutoriel $tutoriel, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser(); // Utilisateur actuellement connecté
+        $historique = new Historique();
+        $historique->setIdUser($user);
+        $historique->setIdTutoriel($tutoriel);
+        $historique->setDateFinish(new \DateTime());
+    
+        $entityManager->persist($historique);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('app_tutoriel_show', ['id' => $tutoriel->getId()]);
+    }
+    
 }

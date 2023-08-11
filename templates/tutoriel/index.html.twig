@@ -3,54 +3,31 @@
 {% block title %}Tutoriel index{% endblock %}
 
 {% block body %}
-    <h1>Tutoriel index</h1>
+    <h1 class="text-center">Tutoriel index</h1>
 
-    <div>
-        {% for categorie in categories %}
-            <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}">{{ categorie.nom }}</a>
+    <div class="row justify-content-center">
+        {% for tutoriel in tutoriels %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center"> <!-- Ajout de la classe text-center ici -->
+                        <h5 class="card-title">
+                            {{ tutoriel.titre }}
+                            {% for categorie in tutoriel.categories %}
+                                <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}" class="badge bg-info text-dark">{{ categorie.nom }}</a>
+                            {% endfor %}
+                        </h5>
+                        <p class="card-text">{{ tutoriel.description }}</p>
+                        <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Show</a>
+                        <a href="{{ path('app_tutoriel_edit', {'id': tutoriel.id}) }}" class="btn btn-secondary">Edit</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col text-center">
+                <p>Pas de tutoriel</p>
+            </div>
         {% endfor %}
     </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Fichier_PDF</th>
-                <th>Fichier_video</th>
-                <th>Catégories</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tutoriel in tutoriels %}
-            <tr>
-                <td>{{ tutoriel.id }}</td>
-                <td>{{ tutoriel.titre }}</td>
-                <td>{{ tutoriel.description }}</td>
-                <td>{{ tutoriel.fichierPDF }}</td>
-                <td>{{ tutoriel.fichierVideo }}</td>
-                <td>
-                    {% for categorie in tutoriel.categories %}
-                        <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}">{{ categorie.nom }}</a>
-                        {% if not loop.last %}, {% endif %}
-                    {% else %}
-                        No Category
-                    {% endfor %}
-                </td>
-                <td>
-                    <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}">show</a>
-                    <a href="{{ path('app_tutoriel_edit', {'id': tutoriel.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_tutoriel_new') }}">Create new</a>
+    <a href="{{ path('app_tutoriel_new') }}" class="btn btn-success">Créer un nouveau</a>
 {% endblock %}
