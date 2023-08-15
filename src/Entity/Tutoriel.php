@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\TutorielRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\TutorielRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: TutorielRepository::class)]
 class Tutoriel
@@ -92,6 +93,14 @@ class Tutoriel
     /**
      * @return Collection<int, Categorie>
      */
+
+     public function getCategoryNames(): string
+    {
+        $categoryNames = $this->categories->map(fn ($category) => $category->getNom())->toArray();
+        return implode(', ', $categoryNames);
+    }
+
+
     public function getCategories(): Collection
     {
         return $this->categories;

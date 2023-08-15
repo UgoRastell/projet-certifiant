@@ -39,6 +39,11 @@ class Categorie
         return $this->tutoriels;
     }
 
+    public function __toString(): string
+    {
+        return $this->nom; // Changez cela selon le nom de votre propriété représentant le nom de la catégorie
+    }
+    
     public function addTutoriel(Tutoriel $tutoriel): self
     {
         if (!$this->tutoriels->contains($tutoriel)) {

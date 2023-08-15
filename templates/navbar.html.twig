@@ -4,9 +4,9 @@
         <!-- Container wrapper -->
         <div class="container">
             <!-- Navbar brand -->
-            <a class="navbar-brand me-2" href="">
+            <a class="navbar-brand me-5" href="{{ path('app_tutoriel_index') }}">
                 <img
-                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                    src="{{ asset('logo/logoMobileSansFond.svg') }}"
                     height="30"
                     alt="MDB Logo"
                     loading="lazy"
@@ -29,13 +29,14 @@
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
                 <!-- Left links -->
+                {% if app.user %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{{ path('app_historique_index') }}" role="button">Historique</a>
                         </div>
                     </li>
                 </ul>
-                
+                {% endif %}
                 <!-- Right links -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if app.user %}

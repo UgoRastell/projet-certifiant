@@ -18,7 +18,6 @@
                         </h5>
                         <p class="card-text">{{ tutoriel.description }}</p>
                         <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Show</a>
-                        <a href="{{ path('app_tutoriel_edit', {'id': tutoriel.id}) }}" class="btn btn-secondary">Edit</a>
                     </div>
                 </div>
             </div>
@@ -28,6 +27,4 @@
             </div>
         {% endfor %}
     </div>
-
-    <a href="{{ path('app_tutoriel_new') }}" class="btn btn-success">Créer un nouveau</a>
 {% endblock %}
