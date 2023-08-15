@@ -23,7 +23,8 @@
                 <th>Fichier PDF</th>
                 <td>
                     {% if tutoriel.fichierPDF %}
-                        <iframe src="{{tutoriel.fichierPDF}}" width="100%" height="600px"></iframe>
+                        {% set pdfPath = asset('uploads/fichiers/' ~ tutoriel.fichierPDF) %}
+                        <iframe src="{{ pdfPath }}" width="100%" height="600px"></iframe>
                     {% else %}
                         No PDF available
                     {% endif %}
