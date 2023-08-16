@@ -16,7 +16,7 @@
                                 <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}" class="badge bg-info text-dark">{{ categorie.nom }}</a>
                             {% endfor %}
                         </h5>
-                        <p class="card-text">{{ tutoriel.description }}</p>
+                        <p class="card-text">{{ tutoriel.description|raw }}</p>
                         <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Show</a>
                     </div>
                 </div>

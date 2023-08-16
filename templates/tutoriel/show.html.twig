@@ -3,49 +3,28 @@
 {% block title %}Tutoriel{% endblock %}
 
 {% block body %}
-    <h1>Tutoriel</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ tutoriel.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ tutoriel.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ tutoriel.description }}</td>
-            </tr>
-            <tr>
-                <th>Fichier PDF</th>
-                <td>
-                    {% if tutoriel.fichierPDF %}
-                        {% set pdfPath = asset('uploads/fichiers/' ~ tutoriel.fichierPDF) %}
-                        <iframe src="{{ pdfPath }}" width="100%" height="600px"></iframe>
-                    {% else %}
-                        No PDF available
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Fichier vidéo</th>
-                <td>
-                    {% if tutoriel.fichierVideo %}
-                        <video width="320" height="240" controls>
-                            <source src="{{ asset(tutoriel.fichierVideo) }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    {% else %}
-                        No video available
-                    {% endif %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_tutoriel_index') }}">Back to list</a>
-    <a href="{{ path('app_tutoriel_finish', {'id': tutoriel.id}) }}">Finish</a>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="embed-responsive embed-responsive-16by9 d-flex justify-content-center">
+                            <iframe class="embed-responsive-item align-self-center" src="{{ asset('uploads/fichiers/' ~ tutoriel.fichierPDF) }}"></iframe>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <p class="small">{{ tutoriel.getCategoryNames() }}</p>
+                            </div>
+                            <h5 class="mb-0">{{ tutoriel.titre }}</h5>
+                            <p class="text-dark mb-0">{{ tutoriel.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('app_tutoriel_index') }}" class="btn btn-secondary">Back to list</a>
+                            <a href="{{ path('app_tutoriel_finish', {'id': tutoriel.id}) }}" class="btn btn-primary">Finish</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
