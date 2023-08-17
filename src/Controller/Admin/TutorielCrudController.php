@@ -74,24 +74,7 @@ class TutorielCrudController extends AbstractCrudController
         
     }
 
-    public function createEntity(string $entityFqcn)
-    {
-        $tutoriel = new Tutoriel();
-        // Set other properties of the tutoriel
 
-        // Add selected categories to the tutoriel
-        $request = $this->requestStack->getCurrentRequest();
-        $selectedCategories = $request->request->get('tutoriel')['categories'] ?? [];
-
-        foreach ($selectedCategories as $categoryId) {
-            $category = $this->entityManager->getRepository(Categorie::class)->find($categoryId);
-            if ($category) {
-                $tutoriel->addCategory($category);
-            }
-        }
-
-        return $tutoriel;
-    }
 
  
 }
