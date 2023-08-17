@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -19,10 +20,12 @@ class TutorielCrudController extends AbstractCrudController
 {
 
     private $entityManager;
+    private $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
+        $this->requestStack = $requestStack;
     }
 
     public static function getEntityFqcn(): string
@@ -70,5 +73,25 @@ class TutorielCrudController extends AbstractCrudController
         ];
         
     }
+
+    public function createEntity(string $entityFqcn)
+    {
+        $tutoriel = new Tutoriel();
+        // Set other properties of the tutoriel
+
+        // Add selected categories to the tutoriel
+        $request = $this->requestStack->getCurrentRequest();
+        $selectedCategories = $request->request->get('tutoriel')['categories'] ?? [];
+
+        foreach ($selectedCategories as $categoryId) {
+            $category = $this->entityManager->getRepository(Categorie::class)->find($categoryId);
+            if ($category) {
+                $tutoriel->addCategory($category);
+            }
+        }
+
+        return $tutoriel;
+    }
+
  
 }
