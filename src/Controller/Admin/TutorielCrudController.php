@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -20,12 +19,10 @@ class TutorielCrudController extends AbstractCrudController
 {
 
     private $entityManager;
-    private $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->requestStack = $requestStack;
     }
 
     public static function getEntityFqcn(): string
@@ -73,8 +70,5 @@ class TutorielCrudController extends AbstractCrudController
         ];
         
     }
-
-
-
  
 }
