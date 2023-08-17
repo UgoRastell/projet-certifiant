@@ -67,7 +67,7 @@ class TutorielCrudController extends AbstractCrudController
                 ->onlyOnForms()
                 ->setFormTypeOptions([
                     'by_reference' => false,
-                    'multiple' => false,
+                    'multiple' => true,
                 ])
             
         ];
