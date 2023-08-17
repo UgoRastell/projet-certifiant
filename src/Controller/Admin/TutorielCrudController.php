@@ -45,6 +45,8 @@ class TutorielCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('titre'),
             TextEditorField::new('description'),
+            TextField::new('categoryNames', 'Categories')
+                ->hideOnForm(),
             ImageField::new('fichier_PDF')
                 ->setLabel('PDF')
                 ->setBasePath('uploads/fichiers/')
@@ -64,8 +66,9 @@ class TutorielCrudController extends AbstractCrudController
                     'by_reference' => false,
                     'multiple' => true,
                 ])
+            
         ];
+        
     }
-    
  
 }
