@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Historique;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TutorielRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -31,6 +31,9 @@ class Tutoriel
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'tutoriels')]
     private Collection $categories;
+
+    #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'id_tutoriel', cascade: ['remove'])]
+    private $historiques;
 
     public function __construct()
     {
