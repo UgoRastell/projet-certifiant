@@ -7,6 +7,9 @@ parameters:
     app.upload_PDF: '%kernel.project_dir%/public/uploads/fichiers'
     app.upload_video: '%kernel.project_dir%/public/uploads/videos'
 services:
+    App\EventListener\LogoutSubscriber:
+        arguments:
+            $urlGenerator: '@router'
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

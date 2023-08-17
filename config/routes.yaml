@@ -5,3 +5,8 @@ controllers:
 app_logout:
     path: /logout
     methods: GET
+
+app_login:
+    path: /auth/login
+    controller: App\Controller\LoginController::index
+
