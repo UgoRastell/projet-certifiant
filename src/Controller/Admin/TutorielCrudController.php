@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -41,11 +42,20 @@ class TutorielCrudController extends AbstractCrudController
         ;
     }
     
-    public function configureActions(Actions $actions): Actions
+    public function addCategoryToTutoriel(Tutoriel $tutoriel, LifecycleEventArgs $event)
     {
-        return $actions
-            ->add(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
-            ->add(Crud::PAGE_NEW, Action::SAVE_AND_RETURN);
+        foreach ($tutoriel->getCategories() as $category) {
+            if (!$tutoriel->getCategories()->contains($category)) {
+                $tutoriel->addCategory($category);
+            }
+        }
+    }
+
+    public function getSubscribedEvents()
+    {
+        return [
+            'prePersist',
+        ];
     }
 
     public function configureFields(string $pageName): iterable
