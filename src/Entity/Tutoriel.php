@@ -30,7 +30,7 @@ class Tutoriel
     private ?string $fichier_video = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'tutoriels')]
-    private ?Collection $categories = null;
+    private Collection $categories;
 
     #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'id_tutoriel', cascade: ['remove'])]
     private $historiques;
