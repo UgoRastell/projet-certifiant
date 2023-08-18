@@ -30,8 +30,7 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id')
                 ->hideOnForm(),
-            TextField::new('email')
-                ->setFormTypeOption('disabled', 'disabled'),
+            TextField::new('email'),
             ArrayField::new('roles')
         ];
     }
