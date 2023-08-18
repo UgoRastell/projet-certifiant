@@ -41,22 +41,6 @@ class TutorielCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Tutoriel')
         ;
     }
-    
-    public function addCategoryToTutoriel(Tutoriel $tutoriel, LifecycleEventArgs $event)
-    {
-        foreach ($tutoriel->getCategories() as $category) {
-            if (!$tutoriel->getCategories()->contains($category)) {
-                $tutoriel->addCategory($category);
-            }
-        }
-    }
-
-    public function getSubscribedEvents()
-    {
-        return [
-            'prePersist',
-        ];
-    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -92,11 +76,11 @@ class TutorielCrudController extends AbstractCrudController
 
     }
 
-    // // Ajouter cette méthode pour le débogage lors de la soumission du formulaire de création
-    // public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    // {
-    //     dd($entityInstance); // Cela affichera les données du formulaire soumis
-    //     parent::persistEntity($entityManager, $entityInstance);
-    // }
+    // Ajouter cette méthode pour le débogage lors de la soumission du formulaire de création
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        dd($entityInstance); // Cela affichera les données du formulaire soumis
+        parent::persistEntity($entityManager, $entityInstance);
+    }
  
 }

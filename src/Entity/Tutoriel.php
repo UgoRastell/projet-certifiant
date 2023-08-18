@@ -28,8 +28,9 @@ class Tutoriel
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fichier_video = null;
-
+    
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'tutoriels')]
+    #[ORM\JoinTable(name: 'tutoriel_categorie')]
     private ?Collection $categories = null;
 
     #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'id_tutoriel', cascade: ['remove'])]
