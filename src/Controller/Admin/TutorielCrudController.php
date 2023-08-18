@@ -76,11 +76,11 @@ class TutorielCrudController extends AbstractCrudController
 
     }
 
-    // Ajouter cette méthode pour le débogage lors de la soumission du formulaire de création
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        dd($entityInstance); // Cela affichera les données du formulaire soumis
-        parent::persistEntity($entityManager, $entityInstance);
-    }
+    // // Ajouter cette méthode pour le débogage lors de la soumission du formulaire de création
+    // public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    // {
+    //     dd($entityInstance); // Cela affichera les données du formulaire soumis
+    //     parent::persistEntity($entityManager, $entityInstance);
+    // }
  
 }
