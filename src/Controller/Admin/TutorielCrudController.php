@@ -63,6 +63,7 @@ class TutorielCrudController extends AbstractCrudController
                 ->autocomplete()
                 ->onlyOnForms()
                 ->setFormTypeOptions([
+                    'by_reference' => false,
                     'multiple' => true,
                 ])
             
