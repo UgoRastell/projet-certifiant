@@ -30,7 +30,7 @@ class Tutoriel
     private ?string $fichier_video = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'tutoriels')]
-    private Collection $categories;
+    private ?Collection $categories = null;
 
     #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'id_tutoriel', cascade: ['remove'])]
     private $historiques;
@@ -39,7 +39,7 @@ class Tutoriel
     {
         $this->categories = new ArrayCollection();
     }
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -111,19 +111,26 @@ class Tutoriel
 
     public function addCategory(Categorie $category): self
     {
+        if ($this->categories === null) {
+            $this->categories = new ArrayCollection();
+        }
+    
         if (!$this->categories->contains($category)) {
             $this->categories->add($category);
-            $category->addTutoriel($this); // Assurez-vous d'ajouter le tutoriel à la catégorie également
+            $category->addTutoriel($this);
         }
-
+    
         return $this;
     }
-
+    
     public function removeCategory(Categorie $category): self
     {
-        $this->categories->removeElement($category);
-        $category->removeTutoriel($this); // Assurez-vous de retirer le tutoriel de la catégorie également
-
+        if ($this->categories !== null) {
+            $this->categories->removeElement($category);
+            $category->removeTutoriel($this);
+        }
+    
         return $this;
     }
+    
 }
