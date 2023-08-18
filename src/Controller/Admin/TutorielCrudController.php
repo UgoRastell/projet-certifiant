@@ -8,13 +8,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -42,26 +39,7 @@ class TutorielCrudController extends AbstractCrudController
         ;
     }
 
-    public function configureActions(Actions $actions): Actions
-    {
-        // Ajouter une action personnalisée
-        $customAction = Action::new('customAction', 'Custom Action', 'fa fa-cogs')
-            ->linkToCrudAction('customActionHandler'); // Cette méthode sera appelée lorsque l'action est exécutée
 
-        return $actions
-            ->add(Crud::PAGE_INDEX, $customAction); // Ajouter l'action à la page d'index
-    }
-
-    public function customActionHandler(AdminContext $context)
-    {
-        // Ici, vous pouvez exécuter votre propre logique pour l'action personnalisée
-        // Par exemple, dump les données de la requête pour voir ce qui est envoyé
-        dump($context->getRequest()->request->all());
-
-        // Vous pouvez également rediriger l'utilisateur vers une autre page
-        return $this->redirectToRoute('some_route');
-    }
-    
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -93,9 +71,14 @@ class TutorielCrudController extends AbstractCrudController
             
         ];
         
-        
+
     }
 
-    
+    // Ajouter cette méthode pour le débogage lors de la soumission du formulaire de création
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        dd($entityInstance); // Cela affichera les données du formulaire soumis
+        parent::persistEntity($entityManager, $entityInstance);
+    }
  
 }
