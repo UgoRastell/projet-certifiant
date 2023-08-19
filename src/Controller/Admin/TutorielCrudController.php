@@ -44,7 +44,6 @@ class TutorielCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        phpinfo();
         return [
             IdField::new('id')
                 ->hideOnForm(),
