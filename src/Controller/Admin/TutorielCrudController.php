@@ -50,7 +50,7 @@ class TutorielCrudController extends AbstractCrudController
             TextField::new('titre'),
             TextEditorField::new('description'),
             TextField::new('categoryNames', 'Categories')
-                ->hideOnForm(),
+            ->hideOnForm(),        
             ImageField::new('fichier_PDF')
                 ->setLabel('PDF')
                 ->setBasePath('uploads/fichiers/')
@@ -70,6 +70,7 @@ class TutorielCrudController extends AbstractCrudController
                     'by_reference' => false,
                     'multiple' => true,
                 ])
+            
             
         ];
         
