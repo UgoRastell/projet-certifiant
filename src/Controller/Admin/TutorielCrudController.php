@@ -52,41 +52,17 @@ class TutorielCrudController extends AbstractCrudController
             TextField::new('categoryNames', 'Categories')
             ->hideOnForm(),        
             ImageField::new('fichier_PDF')
-            ->setLabel('PDF')
-            ->setBasePath('uploads/fichiers/')
-            ->setUploadDir('public/uploads/fichiers/')
-            ->setUploadedFileNamePattern('[randomhash].[extension]')
-            ->hideOnIndex()
-            ->setFormTypeOptions([
-                'constraints' => [
-                    new \Symfony\Component\Validator\Constraints\File([
-                        'maxSize' => '1000M', // Limite de taille maximale de 10 Mo
-                        'mimeTypes' => [
-                            'application/pdf', // Type MIME autorisé : PDF
-                        ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.', // Message en cas d'erreur de type MIME
-                    ]),
-                ],
-            ]),
-        ImageField::new('fichier_video')
-            ->setLabel('Vidéo')
-            ->setBasePath('uploads/videos/')
-            ->setUploadDir('public/uploads/videos/')
-            ->setUploadedFileNamePattern('[randomhash].[extension]')
-            ->hideOnIndex()
-            ->setFormTypeOptions([
-                'constraints' => [
-                    new \Symfony\Component\Validator\Constraints\File([
-                        'maxSize' => '1000M', // Limite de taille maximale de 10 Mo
-                        // Ajoutez d'autres types MIME autorisés pour les vidéos si nécessaire
-                        'mimeTypes' => [
-                            'video/mp4', // Exemple : MP4
-                        ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une vidéo valide.', // Message en cas d'erreur de type MIME
-                    ]),
-                ],
-            ]),
-        
+                ->setLabel('PDF')
+                ->setBasePath('uploads/fichiers/')
+                ->setUploadDir('public/uploads/fichiers/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->hideOnIndex(),
+            ImageField::new('fichier_video')
+                ->setLabel('Vidéo')
+                ->setBasePath('uploads/videos/')
+                ->setUploadDir('public/uploads/videos/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->hideOnIndex(),
             AssociationField::new('categories', 'Categories')
                 ->autocomplete()
                 ->onlyOnForms()
