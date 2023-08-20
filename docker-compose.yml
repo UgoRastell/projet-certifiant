@@ -22,6 +22,7 @@ services:
       - 8081:80
     environment:
       - PMA_ARBITRARY=1
+    UPLOAD_LIMIT: 6400M
 
   nginx:
     container_name: nginx
