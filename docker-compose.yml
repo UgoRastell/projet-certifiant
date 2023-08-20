@@ -10,6 +10,7 @@ services:
       MYSQL_DATABASE: projet-certifiant
       MYSQL_USER: user
       MYSQL_PASSWORD: user
+      UPLOAD_LIMIT: 6400M
     # ports:
     #   - "4306:3306"
     volumes:
@@ -22,7 +23,6 @@ services:
       - 8081:80
     environment:
       - PMA_ARBITRARY=1
-    UPLOAD_LIMIT: 6400M
 
   nginx:
     container_name: nginx
