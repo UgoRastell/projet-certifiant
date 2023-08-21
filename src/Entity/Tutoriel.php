@@ -37,6 +37,9 @@ class Tutoriel
     #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'id_tutoriel', cascade: ['remove'])]
     private $historiques;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $texte = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -132,6 +135,18 @@ class Tutoriel
             $category->removeTutoriel($this);
         }
     
+        return $this;
+    }
+
+    public function getTexte(): ?string
+    {
+        return $this->texte;
+    }
+
+    public function setTexte(?string $texte): self
+    {
+        $this->texte = $texte;
+
         return $this;
     }
     

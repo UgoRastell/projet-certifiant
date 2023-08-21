@@ -49,6 +49,7 @@ class TutorielCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('titre'),
             TextEditorField::new('description'),
+            TextEditorField::new('texte'),
             TextField::new('categoryNames', 'Categories')
             ->hideOnForm(),        
             ImageField::new('fichier_PDF')
