@@ -3,28 +3,30 @@
 {% block title %}Historique{% endblock %}
 
 {% block body %}
-    <h1>Historique</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Historique</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Tutoriel</th>
-                <th>Date de fin</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for historique in historiques %}
-            <tr>
-                <td>{{ historique.idTutoriel.titre }}</td>
-                <td>{{ historique.dateFinish|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">Aucun historique trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Tutoriel</th>
+                    <th scope="col">Date de fin</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for historique in historiques %}
+                <tr>
+                    <td>{{ historique.idTutoriel.titre }}</td>
+                    <td>{{ historique.dateFinish|date('d/m/Y H:i:s', null, 'fr') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">Aucun historique trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_tutoriel_index') }}">Retour à la liste des tutoriels</a>
+        <a href="{{ path('app_tutoriel_index') }}" class="btn btn-primary">Retour à la liste des tutoriels</a>
+    </div>
 {% endblock %}

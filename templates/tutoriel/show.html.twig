@@ -17,11 +17,9 @@
                         <hr>
 
                         {% if tutoriel.fichierVideo is not empty %}
-
                         <div class="embed-responsive embed-responsive-16by9 d-flex justify-content-center">
                             <iframe class="embed-responsive-item align-self-center" src="{{ asset('uploads/videos/' ~ tutoriel.fichierVideo) }}" style="width: 100%; height: 400px;"></iframe>
                         </div>
-
                         {% endif %}
                         
                         {% if tutoriel.texte %}
