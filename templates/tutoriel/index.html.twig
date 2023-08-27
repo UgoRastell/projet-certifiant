@@ -21,8 +21,7 @@
 
 {% block body %}
     <div class="background-image"> <!-- Ajoutez la classe ici -->
-        <h1 class="text-center">Tutoriel index</h1>
-
+        
         <div class="row justify-content-center">
             {% for tutoriel in tutoriels %}
                 <div class="col-md-4 mb-4">
@@ -36,7 +35,7 @@
                                 {% endfor %}
                             </h5>
                             <p class="card-text">{{ tutoriel.description|raw }}</p>
-                            <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Accéder au tutoriel</a>
                         </div>
                     </div>
                 </div>
