@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\HistoriqueRepository;
+use App\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\HistoriqueRepository;
 
 #[ORM\Entity(repositoryClass: HistoriqueRepository::class)]
 class Historique
@@ -62,6 +63,18 @@ class Historique
     public function setDateFinish(\DateTimeInterface $date_finish): self
     {
         $this->date_finish = $date_finish;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -118,13 +118,23 @@ class TutorielController extends AbstractController
     public function finish(Tutoriel $tutoriel, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser(); // Utilisateur actuellement connecté
-        $historique = new Historique();
-        $historique->setIdUser($user);
-        $historique->setIdTutoriel($tutoriel);
-        $historique->setDateFinish(new \DateTime());
+        
+        // Vérifie si le tutoriel est déjà dans l'historique de l'utilisateur
+        $historique = $entityManager->getRepository(Historique::class)->findOneBy([
+            'id_user' => $user,
+            'id_tutoriel' => $tutoriel,
+        ]);
+        
+        if (!$historique) {
+            // Si l'entrée n'existe pas, ajoutez-la à l'historique
+            $historique = new Historique();
+            $historique->setIdUser($user);
+            $historique->setIdTutoriel($tutoriel);
+            $historique->setDateFinish(new \DateTime());
     
-        $entityManager->persist($historique);
-        $entityManager->flush();
+            $entityManager->persist($historique);
+            $entityManager->flush();
+        }
     
         return $this->redirectToRoute('app_tutoriel_show', ['id' => $tutoriel->getId()]);
     }
