@@ -2,29 +2,49 @@
 
 {% block title %}Tutoriel index{% endblock %}
 
-{% block body %}
-    <h1 class="text-center">Tutoriel index</h1>
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Ajoutez une classe pour les images */
+        .card-img-top {
+            max-height: 200px; /* Définissez la hauteur maximale que vous souhaitez pour les images */
+            width: 100%; /* Pour conserver l'aspect ratio */
+            object-fit: cover; /* Pour conserver l'aspect ratio et couvrir toute la zone de l'image */
+        }
 
-    <div class="row justify-content-center">
-        {% for tutoriel in tutoriels %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center"> <!-- Ajout de la classe text-center ici -->
-                        <h5 class="card-title">
-                            {{ tutoriel.titre }}
-                            {% for categorie in tutoriel.categories %}
-                                <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}" class="badge bg-info text-dark">{{ categorie.nom }}</a>
-                            {% endfor %}
-                        </h5>
-                        <p class="card-text">{{ tutoriel.description|raw }}</p>
-                        <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Show</a>
+        /* Ajoutez une classe pour la card pour assurer une hauteur uniforme */
+        .card {
+            height: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="background-image"> <!-- Ajoutez la classe ici -->
+        <h1 class="text-center">Tutoriel index</h1>
+
+        <div class="row justify-content-center">
+            {% for tutoriel in tutoriels %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{% if tutoriel.image is not null %}{{ asset('/uploads/images/' ~ tutoriel.image) }}{% else %}{{ asset('/uploads/images/placeholder.png') }}{% endif %}" class="card-img-top" alt="Image alt text">
+                        <div class="card-body text-center"> <!-- Ajout de la classe text-center ici -->
+                            <h5 class="card-title">
+                                {{ tutoriel.titre }}
+                                {% for categorie in tutoriel.categories %}
+                                    <a href="{{ path('app_tutoriel_index', {'category': categorie.id}) }}" class="badge bg-info text-dark">{{ categorie.nom }}</a>
+                                {% endfor %}
+                            </h5>
+                            <p class="card-text">{{ tutoriel.description|raw }}</p>
+                            <a href="{{ path('app_tutoriel_show', {'id': tutoriel.id}) }}" class="btn btn-primary">Show</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% else %}
-            <div class="col text-center">
-                <p>Pas de tutoriel</p>
-            </div>
-        {% endfor %}
+            {% else %}
+                <div class="col text-center">
+                    <p>Pas de tutoriel</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

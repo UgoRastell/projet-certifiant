@@ -33,12 +33,14 @@ class Tutoriel
     #[ORM\JoinTable(name: 'tutoriel_categorie')]
     private ?Collection $categories = null;
 
-
     #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'id_tutoriel', cascade: ['remove'])]
     private $historiques;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $texte = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -146,6 +148,18 @@ class Tutoriel
     public function setTexte(?string $texte): self
     {
         $this->texte = $texte;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

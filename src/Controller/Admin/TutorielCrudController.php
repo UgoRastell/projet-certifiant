@@ -49,9 +49,14 @@ class TutorielCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('titre'),
             TextEditorField::new('description'),
-            TextEditorField::new('texte'),
             TextField::new('categoryNames', 'Categories')
-            ->hideOnForm(),        
+            ->hideOnForm(),  
+            ImageField::new('image')
+                ->setLabel('Illustartion du tutoriel')
+                ->setBasePath('uploads/images/')
+                ->setUploadDir('public/uploads/images/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->hideOnIndex(),      
             ImageField::new('fichier_PDF')
                 ->setLabel('PDF')
                 ->setBasePath('uploads/fichiers/')
