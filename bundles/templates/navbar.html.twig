@@ -1,0 +1,62 @@
+{% block body %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-5" href="{{ path('app_tutoriel_index') }}">
+                <img
+                    src="{{ asset('logo/logoMobileSansFond.svg') }}"
+                    height="30"
+                    alt="MDB Logo"
+                    loading="lazy"
+                />
+            </a>
+
+            <!-- Toggle button -->
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample"
+                aria-controls="navbarButtonsExample"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                {% if app.user %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{{ path('app_historique_index') }}" role="button">Historique</a>
+                        </div>
+                    </li>
+                </ul>
+                {% endif %}
+                <!-- Right links -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="btn btn-light me-2" href="{{ path('app_logout') }}" role="button">Déconnexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="{{ path('app_delete_user') }}" role="button">Désinscription</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{{ path('app_login') }}" role="button">Connexion</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+{% endblock %}

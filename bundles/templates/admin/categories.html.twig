@@ -1,0 +1,7 @@
+{% extends '@EasyAdmin/default/field/association.html.twig' %}
+
+{% block field_content %}
+    {% for item in value %}
+        {{ item.nom }}
+    {% endfor %}
+{% endblock %}

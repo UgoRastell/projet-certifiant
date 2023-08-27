@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tutoriel{% endblock %}
+
+{% block body %}
+<section style="background-color: #212529;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h5 class="mb-3">{{ tutoriel.titre }}</h5>
+                            <p>{{ tutoriel.description|raw }}</p>
+                        </div>
+                        
+                        <hr>
+
+                        {% if tutoriel.fichierVideo is not empty %}
+                        <div class="embed-responsive embed-responsive-16by9 d-flex justify-content-center">
+                            <iframe class="embed-responsive-item align-self-center" src="{{ asset('uploads/videos/' ~ tutoriel.fichierVideo) }}" style="width: 100%; height: 400px;"></iframe>
+                        </div>
+                        {% endif %}
+                        
+                        {% if tutoriel.texte %}
+                        <hr>
+                        
+                        <h5 class="mt-4">Tutorial Text</h5>
+                        <p>{{ tutoriel.texte|raw }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_tutoriel_index') }}" class="btn btn-secondary">Retour</a>
+                        {% if tutoriel.fichierPDF is not empty %}
+                        <a href="{{ asset('uploads/fichiers/' ~ tutoriel.fichierPDF) }}" download="{{ tutoriel.titre }}" class="btn btn-primary">Télécharger le PDF</a>
+                        {% endif %}
+                        <a href="{{ path('app_tutoriel_finish', {'id': tutoriel.id}) }}" class="btn btn-primary">Finish</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
