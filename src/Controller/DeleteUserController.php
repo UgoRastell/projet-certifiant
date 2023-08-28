@@ -27,8 +27,6 @@ class DeleteUserController extends AbstractController
             return $this->redirectToRoute('app_logout'); 
         }
 
-        // Gérer le cas où l'utilisateur n'est pas connecté ou n'est pas une instance de User
-
         return $this->render('delete_user/index.html.twig', [
             'controller_name' => 'DeleteUserController',
         ]);
